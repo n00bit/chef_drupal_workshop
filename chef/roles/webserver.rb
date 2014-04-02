@@ -1,8 +1,8 @@
 name "webserver"
 description "Web server developer configuration"
 run_list(
-  "recipe[build-essential]",
   "recipe[apt]",
+  "recipe[build-essential]",
   "recipe[mysql::server]",
   "recipe[nginx]",
   "recipe[php]",
