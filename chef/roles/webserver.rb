@@ -7,12 +7,22 @@ run_list(
   "recipe[nginx]",
   "recipe[php]",
   "recipe[php-fpm]",
-  "recipe[drupal]"
+  "recipe[postgresql::server]",
+  "recipe[postgresql::client]",
+  "recipe[phpmyadmin]",
+  "recipe[drupal]",
+  "recipe[phppgadmin]"
 )
+
 default_attributes(
   'mysql' => {
-    :server_debian_password => "root123",
-    :server_repl_password => "root123",
-    :server_root_password => "root123"
+    :server_debian_password => "root",
+    :server_repl_password => "root",
+    :server_root_password => "root"
+  },
+  'postgresql' => {
+    'password' => {
+      'postgres' => 'root'
+    }
   }
 )
