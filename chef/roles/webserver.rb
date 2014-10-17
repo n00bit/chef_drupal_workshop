@@ -10,8 +10,10 @@ run_list(
   "recipe[postgresql::server]",
   "recipe[postgresql::client]",
   "recipe[phpmyadmin]",
-  "recipe[drupal]",
-  "recipe[phppgadmin]"
+  "recipe[phppgadmin]",
+  "recipe[phing]",
+  "recipe[composer]",
+  "recipe[drupal]"
 )
 
 default_attributes(

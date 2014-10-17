@@ -1,5 +1,6 @@
 include_recipe "php::module_gd"
 include_recipe "php::module_mysql"
+include_recipe "composer"
 
 root = "/var/www"
 
@@ -26,4 +27,8 @@ end
 
 nginx_site resource_name do
   enable true
+end
+
+execute "create database" do
+  command "mysql -uroot -p#{node['mysql']['server_root_password']} -e \"CREATE DATABASE webdb\""
 end

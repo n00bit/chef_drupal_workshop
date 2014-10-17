@@ -122,7 +122,7 @@ bash 'extract-phppgadmin' do
 	code <<-EOH
 		rm -fr *
 		tar xzf #{Chef::Config['file_cache_path']}/phpPgAdmin-#{node['phppgadmin']['version']}/phpPgAdmin-#{node['phppgadmin']['version']}.tar.gz
-		mv #{Chef::Config['file_cache_path']}/phpPgAdmin-#{node['phppgadmin']['version']}/phppgadmin-REL_#{version}/* #{home}/
+		mv phppgadmin-REL_#{version}/* #{home}/
 	EOH
 	not_if { ::File.exists?("#{home}/index.php")}
 end

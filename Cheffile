@@ -16,6 +16,7 @@ cookbook "build-essential", "1.4.4"
 
 # cookbook 'chef-client'
 cookbook "cron"
+cookbook "composer"
 
 #d
 
@@ -66,6 +67,10 @@ cookbook "nginx"
 cookbook "php"
 cookbook "php-fpm"
 cookbook "postgresql", '~> 3.0.0'
+
+cookbook "phing",
+  :git => 'https://github.com/goruha/chef-phing',
+  :ref => 'add_shell_timeout_support'
 
 
 #q
