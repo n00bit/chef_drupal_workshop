@@ -30,5 +30,9 @@ nginx_site resource_name do
 end
 
 execute "create database" do
-  command "mysql -uroot -p#{node['mysql']['server_root_password']} -e \"CREATE DATABASE webdb\""
+  command "mysql -uroot -p#{node['mysql']['server_root_password']} -e \"CREATE DATABASE IF NOT EXISTS  webdb\""
+end
+
+service "mysql" do
+  action :restart
 end

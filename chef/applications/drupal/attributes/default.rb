@@ -6,3 +6,6 @@ set['php-fpm']['pools'] = [
     :group => "www-data",
   }
 ]
+
+set['mysql']['bind_address'] = "0.0.0.0"
+set['mysql']['root_network_acl'] = "%"
