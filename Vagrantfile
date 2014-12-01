@@ -9,7 +9,6 @@ Vagrant.configure("2") do |config|
     machine.vm.network :private_network, ip: "10.0.0.10"
 
     machine.vm.synced_folder ".", "/vagrant", :disabled => false, :nfs => true, :windows__nfs_options => ["-exec"]
-    #machine.vm.synced_folder "./www", "/var/www", :disabled => false, :nfs => true, :windows__nfs_options => ["-exec"]
 
     machine.vm.provision :chef_solo do |chef|
       chef.cookbooks_path = ["cookbooks", "chef/applications"]

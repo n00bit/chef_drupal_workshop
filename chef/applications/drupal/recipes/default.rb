@@ -1,5 +1,8 @@
 include_recipe "php::module_gd"
 include_recipe "php::module_mysql"
+
+package "php5-xdebug"
+
 include_recipe "composer"
 
 root = "/var/www"
@@ -29,10 +32,36 @@ nginx_site resource_name do
   enable true
 end
 
-execute "create database" do
+execute "create database for mysql" do
   command "mysql -uroot -p#{node['mysql']['server_root_password']} -e \"CREATE DATABASE IF NOT EXISTS  webdb\""
 end
 
+execute "create database for postgres" do
+  user 'postgres'
+  command "createdb webdb || true"
+end
+
+
 service "mysql" do
   action :restart
+end
+
+
+service 'php5-fpm' do
+  service_name 'php5-fpm'
+  supports     :status => true, :restart => true, :reload => true
+  action       [:enable, :start]
+end
+
+
+template "/etc/php5/fpm/php.ini" do
+	source node['php']['ini']['template']
+	cookbook node['php']['ini']['cookbook']
+	unless platform?('windows')
+		owner 'root'
+		group 'root'
+		mode '0644'
+	end
+	variables(:directives => node['php']['directives'])
+	notifies :reload, 'service[php5-fpm]'
 end
